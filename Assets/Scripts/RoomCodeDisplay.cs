@@ -5,7 +5,7 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class RoomCodeDisplay : MonoBehaviour
+public class RoomCodeDisplay : MonoBehaviourPunCallbacks
 {
     public TextMeshPro roomCodeText;
 
@@ -19,5 +19,23 @@ public class RoomCodeDisplay : MonoBehaviour
         {
             roomCodeText.text = "Code: Not connected";
         }
+    }
+
+    // fires when you join a room
+    public override void OnJoinedRoom()
+    {
+        roomCodeText.text = "Code: " + PhotonNetwork.CurrentRoom.Name;
+    }
+
+    // fires when you leave a room
+    public override void OnLeftRoom()
+    {
+        roomCodeText.text = "Code: Not connected";
+    }
+
+    // fires when you join a different room
+    public override void OnJoinedLobby()
+    {
+        roomCodeText.text = "Code: Not connected";
     }
 }
