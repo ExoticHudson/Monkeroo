@@ -6,13 +6,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class RoomPc : MonoBehaviour
+public class RoomPc : MonoBehaviourPunCallbacks
 {
     public ButtonTypeEnum ButtonType;
-
     public TextMeshPro RoomText;
     public string Tag;
-
     private string Letter;
     private bool CanTouch = true;
 
@@ -28,14 +26,12 @@ public class RoomPc : MonoBehaviour
             if (ButtonType == ButtonTypeEnum.Letter)
             {
                 RoomText.text += gameObject.name;
-
-                if (RoomText.text.Length > 12 )
+                if (RoomText.text.Length > 12)
                 {
                     RoomText.text = RoomText.text.Substring(0, RoomText.text.Length - 1);
                 }
                 CanTouch = false;
             }
-
             if (ButtonType == ButtonTypeEnum.Enter)
             {
                 if (PhotonNetwork.InRoom)
@@ -46,10 +42,10 @@ public class RoomPc : MonoBehaviour
                 StartCoroutine(WaitUntilLeftRoom());
                 CanTouch = false;
             }
-
             if (ButtonType == ButtonTypeEnum.Backspace)
             {
-                RoomText.text = RoomText.text.Substring(0, RoomText.text.Length - 1);
+                if (RoomText.text.Length > 0)
+                    RoomText.text = RoomText.text.Substring(0, RoomText.text.Length - 1);
                 CanTouch = false;
             }
         }
@@ -65,9 +61,14 @@ public class RoomPc : MonoBehaviour
 
     private void JoinRoomName()
     {
-        RoomOptions roomOptions = new RoomOptions { MaxPlayers = 10};
-        PhotonNetwork.JoinOrCreateRoom(RoomText.text, roomOptions, TypedLobby.Default);
-        Debug.Log("Joined Room" + RoomText.text);
+        PhotonNetwork.JoinRoom(RoomText.text);
+        Debug.Log("Attempting to join room: " + RoomText.text);
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log("Room not found: " + message);
+        RoomText.text = "NOT FOUND";
     }
 
     IEnumerator WaitUntilLeftRoom()
