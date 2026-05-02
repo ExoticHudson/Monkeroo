@@ -17,6 +17,11 @@ public class RoomPc : MonoBehaviourPunCallbacks
     private void Start()
     {
         Letter = gameObject.name;
+
+        if (!PhotonNetwork.IsConnected)
+        {
+            PhotonVRManager.Connect();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,8 +66,13 @@ public class RoomPc : MonoBehaviourPunCallbacks
 
     private void JoinRoomName()
     {
-        PhotonNetwork.JoinRoom(RoomText.text);
-        Debug.Log("Attempting to join room: " + RoomText.text);
+        RoomOptions roomOptions = new RoomOptions
+        {
+            MaxPlayers = 10,
+            IsVisible = false
+        };
+        PhotonNetwork.JoinOrCreateRoom(RoomText.text, roomOptions, TypedLobby.Default);
+        Debug.Log("Attempting to join/create room: " + RoomText.text);
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
@@ -73,7 +83,9 @@ public class RoomPc : MonoBehaviourPunCallbacks
 
     IEnumerator WaitUntilLeftRoom()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(() => !PhotonNetwork.InRoom);
+        yield return new WaitUntil(() => PhotonNetwork.NetworkClientState == ClientState.JoinedLobby
+                                      || PhotonNetwork.NetworkClientState == ClientState.ConnectedToMasterServer);
         JoinRoomName();
     }
 
