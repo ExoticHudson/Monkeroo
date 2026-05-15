@@ -12,7 +12,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NonWalkable
   - Water
   - UI
   - 
@@ -25,7 +25,7 @@ TagManager:
   - 
   - Zipline
   - 
-  - 
+  - Climb
   - Cull
   - 
   - 
