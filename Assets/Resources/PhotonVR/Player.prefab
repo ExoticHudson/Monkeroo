@@ -3458,8 +3458,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1751728447558428894}
-  - component: {fileID: 4326934373350967150}
-  - component: {fileID: 5850976467650373304}
   - component: {fileID: 3023578874616722128}
   m_Layer: 0
   m_Name: FlingHammer
@@ -3489,33 +3487,6 @@ Transform:
   - {fileID: 8511600550873139899}
   m_Father: {fileID: 5897067227479209265}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &4326934373350967150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3481252604243339862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd11029c9ea3d0d4d987b24745bc3ad3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ptView: {fileID: 7780029385335637883}
---- !u!114 &5850976467650373304
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3481252604243339862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f473a58a46225e49accd64920ff05be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ptView: {fileID: 7780029385335637883}
-  collider: {fileID: 3023578874616722128}
 --- !u!65 &3023578874616722128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3667,7 +3638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountup: 0
-  amountforce: 300
+  amountforce: 1000
   ptView: {fileID: 7780029385335637883}
   FlingCollider: {fileID: 4017312141206645372}
 --- !u!65 &4067153463517090868
@@ -7901,7 +7872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountup: 0
-  amountforce: 300
+  amountforce: 1000
   ptView: {fileID: 7780029385335637883}
   FlingCollider: {fileID: 8910740185755518156}
 --- !u!65 &8334112136926551269
