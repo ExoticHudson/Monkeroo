@@ -274542,7 +274542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1292010486432183649}
-  force: 1000
+  force: 500
 --- !u!4 &8946660040165035560
 Transform:
   m_ObjectHideFlags: 0
